@@ -367,6 +367,7 @@ details.card>.pad{border-top:1px solid var(--line)}
 /* ── WhatsApp, arrivals ── */
 .item>.side{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
 @media (max-width:560px){.item>.side{flex-direction:row;flex-wrap:wrap;align-items:center}}
+.arr-wa:not(:empty){margin-top:10px}
 .btn.wa{background:#128c4a;white-space:normal;max-width:100%;text-align:left;line-height:1.2;padding-block:6px}.btn.wa:hover{background:#0f7a40}
 a.btn{text-decoration:none}
 .steps-l{margin:0;padding-left:20px;color:var(--muted);font-size:14px;display:grid;gap:4px;text-align:left}
@@ -825,18 +826,19 @@ function waNumber(m) {
   if (d.length === 11 && d.charAt(0) === '0') d = d.slice(1);
   return /^[6-9]\d{9}$/.test(d) ? '91' + d : '';
 }
-function canWhatsApp(b) {
+/* arr = from the Arrivals tab, where the Mess Hav can also send it */
+function canWhatsApp(b, arr) {
   var me = S.data.me;
-  return !!(b && b.status === 'APPROVED' && !b.blocked && b.dateOut >= S.data.today && waNumber(b.mobile) && b.byId === me.id);
+  return !!(b && b.status === 'APPROVED' && !b.blocked && b.dateOut >= S.data.today && waNumber(b.mobile) && (b.byId === me.id || (arr && me.role === 'HAV')));
 }
 function slotWord(s) { return s === 'FN' ? 'forenoon' : 'afternoon'; }
 /* WhatsApp confirmation: a picture card for the guest, sent with the Mess location as its caption */
 function waCaption(b) {
-  return 'Your guest room at PIFFER Mess is confirmed.' + (S.data.mapLink ? '\nMess location: ' + S.data.mapLink : '');
+  return 'Greetings from PIFFER Mess! Your guest room is confirmed and we look forward to welcoming you.' + (S.data.mapLink ? '\nMess location: ' + S.data.mapLink : '');
 }
 function waChatLink(b) { return 'https://wa.me/' + waNumber(b.mobile) + '?text=' + encodeURIComponent(waCaption(b)); }
-function waButton(b, small) {
-  if (!canWhatsApp(b)) return '';
+function waButton(b, small, arr) {
+  if (!canWhatsApp(b, arr)) return '';
   return '<button class="btn wa' + (small ? ' sm' : '') + '" data-act="waCard" data-id="' + esc(b.id) + '">' + icon('chat') + 'Send confirmation on WhatsApp</button>';
 }
 function loadImg(src) { return new Promise(function (res, rej) { var i = new Image(); i.onload = function () { res(i); }; i.onerror = rej; i.src = src; }); }
@@ -863,8 +865,11 @@ function cssImg(name) {
   var m = /^url\(\s*["']?([\s\S]*?)["']?\s*\)$/.exec(v);
   return m ? loadImg(m[1]).catch(function () { return null; }) : Promise.resolve(null);
 }
+/* Words of welcome on the confirmation picture */
+var CARD_WELCOME = 'We are delighted to confirm your stay at PIFFER Mess. Your room will be ready for you, and we look forward to welcoming you.';
+var CARD_CLOSING = 'Should you need anything at all, please do not hesitate to let us know. We wish you a safe journey and a most comfortable stay.';
 /**
- * Draws the confirmation card (1080 x 1350) for one booking (all its rooms), in the style of the sign-in screen:
+ * Draws the confirmation card (1080 wide, about 1600 tall) for one booking (all its rooms), in the style of the sign-in screen:
  * regimental ribbon, crest medallion, motto plaque and PIFFER MESS, with the booking on a white card below.
  */
 function drawCard(b) {
@@ -874,7 +879,15 @@ function drawCard(b) {
     return document.fonts && document.fonts.load ? document.fonts.load(f).catch(function () {}) : null;
   });
   return Promise.all([cssImg('--img-crest'), cssImg('--img-motto')].concat(waits)).then(function (r) {
-    var crest = r[0], motto = r[1], c = document.createElement('canvas'); c.width = W; c.height = H;
+    var crest = r[0], motto = r[1], c = document.createElement('canvas');
+    // the words of welcome, measured first so the picture is as tall as it needs to be
+    var cx = 48, cy = 570, cw2 = W - 96, L = cx + 52, R = cx + cw2 - 52, m = c.getContext('2d');
+    m.font = '500 31px ' + SANS; var welcome = cardWrap(m, CARD_WELCOME, R - L);
+    m.font = '500 29px ' + SANS; var closing = cardWrap(m, CARD_CLOSING, R - L);
+    var y = cy + 76, wlLast = y + 50 + (welcome.length - 1) * 42, divY = wlLast + 30, by0 = divY + 142, bh = 160;
+    var wy = by0 + bh + 82, wh = 96, cdY = wy + wh + 38, clFirst = cdY + 52, clLast = clFirst + (closing.length - 1) * 40;
+    var regY = clLast + 56, signY = regY + 50, chh = signY + 44 - cy;
+    H = cy + chh + 96; c.width = W; c.height = H;
     var g = c.getContext('2d'), FIELD = '#0d2c1b', BRASS = '#c9a453', BRASS2 = '#e4c886', IVORY = '#f4efe2';
     g.textBaseline = 'alphabetic';
     // page
@@ -921,21 +934,20 @@ function drawCard(b) {
     tab('PIFFER MESS', '700 62px ' + SERIF, IVORY, 470, 11, 22, 78, 60); g.restore();
     tab('GUEST ROOM BOOKING CONFIRMED', '700 26px ' + COND, BRASS2, 526, 9, 16, 40, 30);
     // the booking, on a white card that overlaps the hero
-    var cx = 48, cy = 570, cw2 = W - 96, by0 = cy + 76 + 214, chh = (by0 + 160 + 82 + 96 + 44) - cy;
     g.save(); g.shadowColor = 'rgba(13,44,27,.18)'; g.shadowBlur = 36; g.shadowOffsetY = 12;
     g.fillStyle = '#ffffff'; cardRR(g, cx, cy, cw2, chh, 30); g.fill(); g.restore();
-    var L = cx + 52, R = cx + cw2 - 52, y = cy + 76;
     g.textAlign = 'left';
     var hello = 'Dear ' + b.guest + ',';
     g.fillStyle = '#15211a'; cardFit(g, hello, '700', SANS, 44, 28, R - L); g.fillText(hello, L, y);
-    g.fillStyle = '#5b6a60'; g.font = '500 31px ' + SANS; g.fillText('Your stay at PIFFER Mess is confirmed.', L, y + 46);
-    g.fillStyle = '#e1e8df'; g.fillRect(L, y + 72, R - L, 2);
+    g.fillStyle = '#3f4d45'; g.font = '500 31px ' + SANS;
+    welcome.forEach(function (l, i) { g.fillText(l, L, y + 50 + i * 42); });
+    g.fillStyle = '#e1e8df'; g.fillRect(L, divY, R - L, 2);
     // guest room(s)
     var names = rows.map(function (x) { return roomOf(x.room).name + ' (No ' + x.room + ')'; }).join(', ');
-    g.fillStyle = '#5b6a60'; g.font = '700 25px ' + COND; cardSpaced(g, rows.length > 1 ? 'GUEST ROOMS' : 'GUEST ROOM', L, y + 120, 4);
-    g.fillStyle = '#14532d'; var fs = cardFit(g, names, '700', SANS, 56, 32, R - L); g.fillText(names, L, y + 120 + 12 + fs);
+    g.fillStyle = '#5b6a60'; g.font = '700 25px ' + COND; cardSpaced(g, rows.length > 1 ? 'GUEST ROOMS' : 'GUEST ROOM', L, divY + 48, 4);
+    g.fillStyle = '#14532d'; var fs = cardFit(g, names, '700', SANS, 56, 32, R - L); g.fillText(names, L, divY + 48 + 12 + fs);
     // check-in and check-out
-    var by = by0, bh = 160, gap = 64, bw = (R - L - gap) / 2;
+    var by = by0, gap = 64, bw = (R - L - gap) / 2;
     [['CHECK-IN', b.dateIn, b.slotIn, L], ['CHECK-OUT', b.dateOut, b.slotOut, L + bw + gap]].forEach(function (d) {
       g.fillStyle = '#f4f7f3'; cardRR(g, d[3], by, bw, bh, 18); g.fill(); g.strokeStyle = '#dbe3d9'; g.lineWidth = 2; g.stroke();
       g.fillStyle = '#5b6a60'; g.font = '700 23px ' + COND; cardSpaced(g, d[0], d[3] + 26, by + 40, 4);
@@ -952,7 +964,6 @@ function drawCard(b) {
     var info = b.guests + (Number(b.guests) === 1 ? ' guest' : ' guests') + '   ·   Booked by ' + b.by;
     g.fillStyle = '#4f5e55'; cardFit(g, info, '500', SANS, 30, 22, R - L); g.fillText(info, L, by + bh + 52);
     // the Mess Hav will call (like the sign-in screen's name strip)
-    var wy = by + bh + 82, wh = 96;
     g.fillStyle = '#eef7f0'; cardRR(g, L, wy, R - L, wh, 16); g.fill(); g.strokeStyle = '#cfe5d5'; g.lineWidth = 2; g.stroke();
     var ix = L + 28 + 26, iy = wy + wh / 2;
     g.fillStyle = '#14532d'; g.beginPath(); g.arc(ix, iy, 30, 0, Math.PI * 2); g.fill();
@@ -965,6 +976,15 @@ function drawCard(b) {
     g.fillStyle = '#14532d'; g.font = '600 28px ' + SANS;
     var call = cardWrap(g, 'The Mess Hav will call you one day prior to your arrival.', R - (ix + 50) - 20);
     call.forEach(function (l, i) { g.fillText(l, ix + 50, iy + (i - (call.length - 1) / 2) * 36 + 10); });
+    // a warm word to close, signed by the Mess (a brass rule with a small diamond, like a letterhead)
+    g.fillStyle = '#e1e8df'; g.fillRect(L, cdY, R - L, 2);
+    g.save(); g.translate(W / 2, cdY + 1); g.rotate(Math.PI / 4); g.fillStyle = BRASS; g.fillRect(-7, -7, 14, 14); g.restore();
+    g.fillStyle = '#3f4d45'; g.font = '500 29px ' + SANS;
+    closing.forEach(function (l, i) { g.fillText(l, L, clFirst + i * 40); });
+    g.fillStyle = '#5b6a60'; g.font = '500 29px ' + SANS; g.fillText('With warm regards,', L, regY);
+    g.fillStyle = '#14532d'; g.font = '700 34px ' + SERIF; cardSpaced(g, 'PIFFER MESS', L, signY, 3);
+    var sw = 'PIFFER MESS'.split('').reduce(function (n, ch) { return n + g.measureText(ch).width + 3; }, -3);
+    g.fillStyle = '#8a6d2b'; g.font = '700 27px ' + COND; cardSpaced(g, '·  3/5 GR (FF)', L + sw + 18, signY - 2, 2);
     // below the card
     g.textAlign = 'center'; g.fillStyle = '#4f5e55'; g.font = '600 26px ' + SANS;
     g.fillText('Mess location: tap the link sent with this picture', W / 2, cy + chh + 58);
@@ -1239,7 +1259,7 @@ function arrivalCard(g, hav) {
   return '<div class="card item"><span class="rno">' + g.rooms[0] + '</span><div><h3>' + esc(b.guest) + ' <span class="note">· ' + b.guests + (b.guests === 1 ? ' guest' : ' guests') + '</span></h3>' +
     '<div class="meta">' + rooms + ' · booked by ' + esc(b.by) + '</div>' +
     '<div class="dates num"><span>' + esc(fmt(b.dateIn)) + ' ' + b.slotIn + '</span><span class="arr">→</span><span>' + esc(fmt(b.dateOut)) + ' ' + b.slotOut + '</span></div>' +
-    '<div style="margin-top:8px">' + phone + '</div>' + status + ctl + '</div>' +
+    '<div style="margin-top:8px">' + phone + '</div>' + (hav ? '<div class="arr-wa">' + waButton(b, true, true) + '</div>' : '') + status + ctl + '</div>' +
     '<div class="side"><span class="tag t-' + esc(b.purpose) + '">' + esc(b.purpose) + '</span></div></div>';
 }
 
@@ -1823,6 +1843,12 @@ document.addEventListener('change', function (ev) {
     document.querySelectorAll('[data-bkpurpose]').forEach(function (x) { x.checked = x.dataset.bkpurpose === S.bk.purpose; x.closest('.tick').classList.toggle('on', x.checked); });
   } else if (t.id === 'bk-off') {
     S.bk.officerId = t.value;
+  } else if (t.dataset.spoken) {
+    var sid = t.dataset.spoken, sb = S.data.bookings.filter(function (x) { return x.id === sid; })[0];
+    var sInp = document.querySelector('[data-arr="' + sid + '"]'), sNote = sInp ? sInp.value.trim() : (sb && sb.arrivalNote) || '';
+    t.disabled = true;
+    call('apiMarkSpoken', S.token, sid, t.checked, sNote).then(function (st) { delete S.arrNotes[sid]; gotState(st); render(); toast(t.checked ? 'Marked: spoken to ' + (sb ? sb.guest : 'guest') : 'Unmarked'); })
+      .catch(function (e) { t.disabled = false; t.checked = !t.checked; handleErr(e); });
   } else if (t.dataset.allot) {
     var pid = t.dataset.allot, rn = Number(t.value), pr = S.data.pending.filter(function (x) { return x.id === pid; })[0], lim = pr ? pr.rooms || 1 : 1;
     var curA = (S.allot[pid] || []).slice();

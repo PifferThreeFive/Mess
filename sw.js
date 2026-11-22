@@ -1,6 +1,6 @@
 /* PIFFER Mess app: keeps the app's own files on the phone so it opens fast.
    Bookings always come live from the server; nothing about bookings is stored here. */
-const CACHE = 'piffer-mess-v2';
+const CACHE = 'piffer-mess-v3';
 const SHELL = ['./', 'index.html', 'config.js', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'icon-maskable-512.png', 'apple-touch-icon.png', 'favicon.png'];
 
 self.addEventListener('install', function (e) {
