@@ -166,6 +166,23 @@ textarea.inp{min-height:90px;resize:vertical}
 .tabs-desk button{position:relative;min-height:40px;padding:0 14px;border:0;border-radius:8px;background:transparent;color:#cfd9d1;font-weight:600;cursor:pointer}
 .tabs-desk button:hover{background:rgba(255,255,255,.07);color:#fff}
 .tabs-desk button.on{background:rgba(255,255,255,.12);color:#fff;box-shadow:inset 0 -2px 0 var(--brass)}
+.bell{margin-left:auto;position:relative;flex:none;width:42px;height:42px;border-radius:50%;border:0;background:rgba(255,255,255,.08);color:var(--ivory);display:grid;place-items:center;cursor:pointer}
+.bell svg{width:22px;height:22px}
+.bell .badge{position:absolute;top:-2px;right:-4px;min-width:19px;height:19px;padding:0 5px;font-size:11px;box-shadow:0 0 0 2px var(--field)}
+.bell + .me{margin-left:0}
+.notes{display:grid;gap:6px}
+.note-i{display:grid;grid-template-columns:10px 1fr;gap:10px;align-items:start;text-align:left;width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;padding:10px 12px;cursor:pointer;font:inherit;color:inherit}
+.note-i b{display:block;font-weight:500;font-size:14.5px;line-height:1.35}
+.note-i small{display:block;color:var(--muted);font-size:12.5px;margin-top:3px}
+.note-i .dot{width:9px;height:9px;border-radius:50%;margin-top:6px;background:transparent}
+.note-i.new{background:#f3f8f4;border-color:#cfe2d4}
+.note-i.new b{font-weight:700}
+.note-i.new .dot{background:var(--regt-red)}
+.pushban{display:grid;gap:6px;padding:12px 14px;border-radius:12px;background:#fff8e6;border:1px solid #f0dfb4}
+.pushban b{font-size:15px}
+.pushban span{font-size:14px;color:var(--muted);line-height:1.4}
+.pushrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:14px;width:100%}
+.pushrow .lbl{color:var(--muted)}
 .me{margin-left:auto;display:flex;align-items:center;gap:10px;border:0;background:rgba(255,255,255,.08);color:var(--ivory);border-radius:99px;padding:5px 12px 5px 5px;cursor:pointer;max-width:56vw}
 .me .av{flex:none;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--brass);color:var(--field);font:700 13px var(--f-cond)}
 .me .nm{display:grid;text-align:left;line-height:1.1;min-width:0}
@@ -264,6 +281,13 @@ main>*{min-width:0}
 .blk.Blocked{background:repeating-linear-gradient(135deg,#5f6b63 0 6px,#6f7b73 6px 12px);color:#fff}
 .lg-blocked{background:repeating-linear-gradient(135deg,#5f6b63 0 3px,#6f7b73 3px 6px)}
 .blk.mine{box-shadow:inset 0 0 0 2px var(--field),inset 0 0 0 4px rgba(255,255,255,.55)}
+.blk.gone{opacity:.45}
+.p-left{background:#eceff0;color:#56636b}
+.stay-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.stay-acts{display:flex;gap:8px;flex-wrap:wrap;width:100%}
+.stay-acts .btn{flex:1 1 140px}
+.stay-acts .btn[data-v=undo]{flex:0 0 auto}
+.side .pill{margin-top:6px}
 .blk.cl{border-top-left-radius:0;border-bottom-left-radius:0}
 .blk.cr{border-top-right-radius:0;border-bottom-right-radius:0}
 .blk span{overflow:hidden;text-overflow:ellipsis}
@@ -368,6 +392,10 @@ details.card>.pad{border-top:1px solid var(--line)}
 .item>.side{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
 @media (max-width:560px){.item>.side{flex-direction:row;flex-wrap:wrap;align-items:center}}
 .arr-wa:not(:empty){margin-top:10px}
+.wa-box{display:grid;gap:6px;justify-items:start;width:100%}
+.wa-sent{color:var(--ok);font-weight:600;font-size:14.5px;line-height:1.35}
+.wa-sent small{color:var(--muted);font-weight:500;font-size:13px}
+.btn.wa-again{color:#128c4a;border-color:#9fd4b4}
 .btn.wa{background:#128c4a;white-space:normal;max-width:100%;text-align:left;line-height:1.2;padding-block:6px}.btn.wa:hover{background:#0f7a40}
 a.btn{text-decoration:none}
 .steps-l{margin:0;padding-left:20px;color:var(--muted);font-size:14px;display:grid;gap:4px;text-align:left}
@@ -377,6 +405,24 @@ a.btn{text-decoration:none}
 .spoke{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px;align-items:center;margin-top:12px}
 @media (max-width:560px){.spoke{grid-template-columns:minmax(0,1fr) auto}.spoke .tick{grid-column:1/-1}}
 .spoke .tick{min-height:44px}
+.spoke.only{grid-template-columns:minmax(0,1fr)}
+.plan{margin-top:10px;border:1px solid var(--line);border-radius:12px;padding:12px;background:#fbfcfa;display:grid;gap:10px}
+.plan-h{font:600 12.5px/1 var(--f-cond);letter-spacing:.14em;text-transform:uppercase;color:var(--green-2)}
+.arr-full{grid-column:1/-1;min-width:0}
+.arr-full .spoke{margin-top:0}
+.plan-row{display:grid;grid-template-columns:minmax(0,1fr) 140px;gap:6px 8px;align-items:center}
+.plan-row label{grid-column:1/-1;font-weight:600;font-size:14.5px}
+.plan-row .inp{min-width:0;padding-inline:10px}
+.plan-hint{font-size:14px;color:var(--muted);line-height:1.4}
+.plan-hint b{color:var(--ink)}
+.plan-hint.chg{color:var(--warn)}
+.plan .btn{justify-self:start}
+.chgbox{margin-top:10px;border-radius:10px;padding:10px 12px;background:#fff6e0;border:1px solid #f0d99a;font-size:14px;line-height:1.45}
+.chgbox b{display:block;color:#7a5200;margin-bottom:2px}
+.chgbox .new{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:99px;background:var(--regt-red);color:#fff;font:700 11px/1.5 var(--f-cond);letter-spacing:.06em;vertical-align:1px}
+.exp{margin-top:8px;font-size:14.5px;display:grid;gap:2px}
+.exp span{color:var(--muted)}
+.p-chg{background:#fff1cc;color:#7a5200}
 .tel{display:inline-flex;align-items:center;gap:6px;font:700 18px/1.2 var(--f-ui);text-decoration:none}
 .tel svg{width:18px;height:18px}
 .morelist{display:grid;gap:8px}
@@ -433,7 +479,7 @@ var S = {
   allot: {}, rejecting: null, rejectRemarks: {},
   off: { name: '', mobile: '', role: 'OFFR' }, bulk: '', bulkResult: null,
   modal: null, lastPending: null, lastMine: null,
-  arrFilter: 'all', arrNotes: {}, overflow: []
+  arrFilter: 'all', arrNotes: {}, plans: {}, planNew: {}, overflow: []
 };
 var VIEWS = [
   { id: 'board', label: 'Board', icon: 'grid' },
@@ -449,6 +495,7 @@ var PRI = { board: 1, approvals: 2, arrivals: 3, request: 4, manage: 5, mine: 6,
 var ICONS = {
   phone: '<path d="M6.6 3.5h2.6l1.4 4.2-2 1.4a12 12 0 006.3 6.3l1.4-2 4.2 1.4v2.6a2 2 0 01-2.2 2A16.6 16.6 0 014.6 5.7a2 2 0 012-2.2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>',
   more: '<circle cx="5" cy="12" r="1.9" fill="currentColor"/><circle cx="12" cy="12" r="1.9" fill="currentColor"/><circle cx="19" cy="12" r="1.9" fill="currentColor"/>',
+  bell: '<path d="M6 16.5V11a6 6 0 0112 0v5.5l1.5 2H4.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M10 20.5a2.2 2.2 0 004 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
   chat: '<path d="M12 3.5a8.5 8.5 0 00-7.4 12.7L3.5 20.5l4.4-1.1A8.5 8.5 0 1012 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.5 10.5h7M8.5 13.5h4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
   copy: '<rect x="8" y="8" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5 15V6a1 1 0 011-1h9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
   grid: '<path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>',
@@ -608,7 +655,7 @@ function renderAuth() {
     } else if (A.step === 2) {
       body = '<h2>Register</h2>' + steps + who + err +
         '<div class="field"><label for="a-email">Your email</label><input class="inp" id="a-email" type="email" autocomplete="email" placeholder="name@example.com"></div>' +
-        '<p class="note" style="margin:0">Approvals and codes come to this email. We\'ll send a code to confirm it.</p>' +
+        '<p class="note" style="margin:0">Sign-in codes come to this email. We\'ll send a code to confirm it.</p>' +
         '<button class="btn block" data-act="regEmail">Send code</button>' +
         '<button class="link" data-act="regBack">Not you? Use another number</button>';
     } else {
@@ -653,16 +700,109 @@ function renderApp() {
   var main = { board: viewBoard, request: viewRequest, mine: viewMine, approvals: viewApprovals, arrivals: viewArrivals, manage: viewManage, officers: viewOfficers }[S.view]();
   return '<div class="app' + (many ? ' many' : '') + (vis.length >= 8 ? ' many8' : '') + '"><header class="top"><div class="top-in"><div class="crest-sm" role="img" aria-label="Crest"></div>' +
     '<div class="ttl"><b>PIFFER MESS</b><span>Guest Rooms</span></div><nav class="tabs-desk">' + nav + '</nav>' +
-    '<button class="me" data-act="menu" aria-label="Account"><span class="av">' + esc(initials(me.name)) + '</span><span class="nm"><b>' + esc(me.name) + '</b>' + (me.roleLabel ? '<small>' + esc(me.roleLabel) + '</small>' : '') + '</span></button>' +
+    bellBtn() + '<button class="me" data-act="menu" aria-label="Account"><span class="av">' + esc(initials(me.name)) + '</span><span class="nm"><b>' + esc(me.name) + '</b>' + (me.roleLabel ? '<small>' + esc(me.roleLabel) + '</small>' : '') + '</span></button>' +
     '</div><div class="stripe"></div></header><main id="main">' + main + '</main><nav class="tabbar">' + bar + '</nav></div>';
 }
+/* ── Notifications: the bell, the count on the app icon, and phone notifications (installed app only) ── */
+function notes() { return (S.data && S.data.notes) || { unread: 0, items: [] }; }
+function bellBtn() {
+  var n = notes().unread;
+  return '<button class="bell" data-act="notes" aria-label="Notifications' + (n ? ', ' + n + ' new' : '') + '">' + icon('bell') + (n ? '<span class="badge">' + (n > 99 ? '99+' : n) + '</span>' : '') + '</button>';
+}
+function setAppBadge() {
+  var n = notes().unread;
+  try { if (navigator.setAppBadge) { if (n) navigator.setAppBadge(n).catch(function () {}); else navigator.clearAppBadge().catch(function () {}); } } catch (e) {}
+}
+function notesModal() {
+  var it = notes().items;
+  openModal({ title: 'Notifications',
+    body: (it.length ? '<div class="notes">' + it.map(function (n) {
+      return '<button class="note-i' + (n.read ? '' : ' new') + '" data-act="noteGo" data-v="' + esc(n.view) + '"><span class="dot"></span><span><b>' + esc(n.text) + '</b><small>' + esc(stampText(n.time)) + '</small></span></button>';
+    }).join('') + '</div>' : '<p class="note" style="margin:0">No notifications yet. Approvals, changes to your bookings and anything you need to act on will appear here.</p>') + pushRow(),
+    foot: '<button class="btn" data-act="close">Close</button>' });
+  if (notes().unread) call('apiReadNotes', S.token, 'all').then(function (st) { gotState(st); render(); setAppBadge(); }).catch(function () {});
+}
+/** Opening a tab clears its notifications (the Board's stay in the bell until it is opened). */
+function readViewNotes() {
+  var v = S.view;
+  if (S.readingNotes || v === 'board' || !notes().items.some(function (n) { return !n.read && n.view === v; })) return;
+  S.readingNotes = true;
+  call('apiReadNotes', S.token, v).then(function (st) { S.readingNotes = false; gotState(st); if (!editing() && !S.modal) render(); else renderBadges(); setAppBadge(); })
+    .catch(function () { S.readingNotes = false; });
+}
+function pushSupported() { return !!(window.PIFFER_API && 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window); }
+function standalone() { return (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true; }
+/** none (browser link in Apps Script) | ios-home (iPhone, not opened from the Home Screen) | default | granted | denied */
+function pushState() {
+  if (!window.PIFFER_API) return 'none';
+  if (isIOS() && !standalone()) return 'ios-home';
+  if (!pushSupported()) return 'none';
+  return Notification.permission;
+}
+function pushRow() {
+  var s = pushState();
+  if (s === 'none') return '';
+  var body = s === 'granted' && S.pushOn ? '<span class="lbl">Phone notifications:</span> <b>On</b><button class="btn ghost sm" data-act="pushOff">Turn off</button>' :
+    s === 'granted' || s === 'default' ? '<span class="lbl">Phone notifications are off.</span><button class="btn sm" data-act="pushOn">Turn on</button>' :
+    s === 'denied' ? '<span class="lbl">Notifications are blocked for this app. Allow them in the phone\'s settings.</span>' :
+    '<span class="lbl">iPhone: add the app to your Home Screen (Share, then Add to Home Screen) and open it from there to get notifications.</span>';
+  return '<div class="pushrow" style="margin-top:12px">' + body + '</div>';
+}
+function pushBanner() {
+  var s = pushState();
+  if ((s !== 'default' && s !== 'ios-home') || store('pm_push_later')) return '';
+  return '<section class="pushban"><b>Get notifications on this phone</b>' +
+    (s === 'default' ? '<span>Approvals, changes to bookings and anything you need to act on will appear like any other app\'s notification, with the count on the app icon.</span>' +
+      '<div class="row"><button class="btn sm" data-act="pushOn">Turn on notifications</button><button class="btn ghost sm" data-act="pushLater">Not now</button></div>' :
+      '<span>On iPhone, first add this app to your Home Screen: tap Share, then Add to Home Screen. Open it from there and turn on notifications.</span>' +
+      '<div class="row"><button class="btn ghost sm" data-act="pushLater">OK</button></div>') + '</section>';
+}
+function b64uBytes(s) {
+  s = String(s).replace(/-/g, '+').replace(/_/g, '/'); while (s.length % 4) s += '=';
+  var b = atob(s), a = new Uint8Array(b.length); for (var i = 0; i < b.length; i++) a[i] = b.charCodeAt(i); return a;
+}
+/** Subscribes this phone (or checks in with the existing subscription) and tells the server where to reach it. */
+function pushSubscribe() {
+  if (!pushSupported() || !S.data || !S.data.pushKey) return Promise.reject(new Error('Notifications are not available on this phone.'));
+  return navigator.serviceWorker.ready.then(function (reg) {
+    return reg.pushManager.getSubscription().then(function (sub) {
+      return sub || reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64uBytes(S.data.pushKey) });
+    });
+  }).then(function (sub) { return call('apiPushSubscribe', S.token, sub.toJSON(), navigator.userAgent.slice(0, 100)); })
+    .then(function () { S.pushOn = true; store('pm_push_off', null); });
+}
+function pushOff() {
+  return navigator.serviceWorker.ready.then(function (reg) { return reg.pushManager.getSubscription(); }).then(function (sub) {
+    if (!sub) return;
+    var ep = sub.endpoint;
+    return sub.unsubscribe().then(function () { return call('apiPushUnsubscribe', S.token, ep); });
+  }).then(function () { S.pushOn = false; });
+}
+/** The phone's notification handler needs to know who is signed in, to ask the server what is new. */
+function swToken(t) {
+  if (!window.PIFFER_API || !window.caches) return;
+  caches.open('piffer-auth').then(function (c) { return t ? c.put('./__token', new Response(t)) : c.delete('./__token'); }).catch(function () {});
+}
+function afterSignIn() {
+  setAppBadge(); swToken(S.token);
+  if (pushState() === 'granted' && !store('pm_push_off')) pushSubscribe().then(function () { if (S.modal) render(); }).catch(function () {});
+  var m = /[#&]v=(\w+)/.exec(location.hash || '');
+  if (m && canSee(m[1])) { S.view = m[1]; try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {} }
+}
+if (window.navigator && navigator.serviceWorker) navigator.serviceWorker.addEventListener('message', function (e) {
+  var v = e.data && e.data.go;
+  if (v && S.data && canSee(v)) { if (S.modal) closeModal(); S.view = v; render(); window.scrollTo(0, 0); }
+  if (e.data && e.data.refresh && S.token) refresh(true);
+});
 function badgeFor(id) {
   if (id === 'approvals') return S.data.pending.length || 0;
   if (id === 'mine') return unseenCount();
-  if (id === 'arrivals') return S.data.me.role === 'HAV' ? arrivalGroups().filter(function (g) { return !g.b.spoken; }).length : 0;
+  if (id === 'arrivals') return S.data.me.role === 'HAV' ? arrivalGroups().filter(function (g) { return !g.b.spoken; }).length : unseenPlans().length;
   return 0;
 }
 function renderBadges() {
+  var bl = document.querySelector('.bell');
+  if (bl) bl.outerHTML = bellBtn();
   document.querySelectorAll('[data-badge]').forEach(function (el) {
     var n = badgeFor(el.getAttribute('data-badge'));
     el.className = n ? 'badge' : ''; el.textContent = n || '';
@@ -675,15 +815,18 @@ function roomStatus(room) {
   var bs = S.data.bookings.filter(function (b) { return b.room === room.no; });
   if (!room.inService) return { cls: 'oos', pill: 'Out of service', short: 'Closed', mini: '', info: 'Not available for booking.' };
   var until = function (b) { return 'Till ' + esc(fmt(b.dateOut)) + ' ' + b.slotOut; };
-  var occ = bs.filter(function (b) { return bIn(b) <= cur && cur <= bOut(b); })[0];
+  var occ = bs.filter(function (b) { return bIn(b) <= cur && cur <= bOut(b) && !b.departedOn; })[0];
+  var left = bs.filter(function (b) { return b.departedOn && b.departedOn.slice(0, 10) === today; }).sort(function (a, c) { return a.departedOn < c.departedOn ? 1 : -1; })[0];
   if (occ && occ.blocked) return { cls: 'oos', pill: 'Blocked', short: 'Blocked', mini: 'till ' + fmtShort(occ.dateOut), b: occ, info: (occ.reason ? '<strong>' + esc(occ.reason) + '</strong><br>' : '') + until(occ) };
+  if (occ && !occ.blocked && !occ.arrivedOn && occ.dateIn === today) return { cls: 'arriving', pill: 'Awaiting guest', short: 'Awaiting', mini: 'not arrived', b: occ,
+    info: '<strong>' + esc(occ.guest) + '</strong> · by ' + esc(occ.by) + '<br>Not arrived yet · ' + until(occ) };
   if (occ) return { cls: 'occupied', pill: occ.dateOut === today ? 'Departs ' + occ.slotOut : 'Occupied', short: occ.dateOut === today ? 'Departs ' + occ.slotOut : 'Occupied', mini: occ.dateOut === today ? 'today' : 'till ' + fmtShort(occ.dateOut), b: occ,
     info: '<strong>' + esc(occ.guest) + '</strong> · by ' + esc(occ.by) + '<br>' + until(occ) };
   var next = bs.filter(function (b) { return bIn(b) > cur; }).sort(function (a, c) { return bIn(a) - bIn(c); })[0];
   if (next && next.dateIn === today) return { cls: 'arriving', pill: (next.blocked ? 'Blocked from ' : 'Arriving ') + next.slotIn, short: next.blocked ? 'Blocked ' + next.slotIn : 'Arrives ' + next.slotIn, mini: 'today', b: next,
     info: (next.blocked ? (next.reason ? '<strong>' + esc(next.reason) + '</strong><br>' : '') : '<strong>' + esc(next.guest) + '</strong> · by ' + esc(next.by) + '<br>') + until(next) };
-  return { cls: 'vacant', pill: 'Vacant', short: 'Vacant', mini: next ? 'next ' + fmtShort(next.dateIn) : '', b: null,
-    info: next ? 'Next: <strong>' + esc(fmt(next.dateIn)) + ' ' + next.slotIn + '</strong><br>' + esc(next.blocked ? 'Blocked' : next.guest) : 'No upcoming bookings.' };
+  return { cls: 'vacant', pill: 'Vacant', short: 'Vacant', mini: next ? 'next ' + fmtShort(next.dateIn) : left ? 'free now' : '', b: left || null,
+    info: (left ? 'Guest left at ' + esc(left.departedOn.slice(11, 16)) + '<br>' : '') + (next ? 'Next: <strong>' + esc(fmt(next.dateIn)) + ' ' + next.slotIn + '</strong>' + (left ? '' : '<br>' + esc(next.blocked ? 'Blocked' : next.guest)) : left ? '' : 'No upcoming bookings.') };
 }
 function viewBoard() {
   var d = S.data, today = d.today;
@@ -704,7 +847,7 @@ function viewBoard() {
   return '<section class="sec-h board-h"><div><div class="kicker">' + esc(fmt(today, true)) + '</div><h2>Today: ' + vacant + ' of ' + d.rooms.length + ' rooms vacant</h2></div>' +
     '<div class="row">' + (canBlock() ? '<button class="btn ghost" data-act="openBlock">Block a room</button>' : '') + (canAddExisting() ? '<button class="btn ghost" data-act="openBk">Add existing booking</button>' : '') +
     '<button class="btn" data-act="go" data-v="request">' + icon('plus') + (directBook() ? 'New booking' : 'New request') + '</button></div></section>' +
-    '<section class="rooms">' + cards + '</section>' + viewChart() +
+    pushBanner() + '<section class="rooms">' + cards + '</section>' + viewChart() +
     '<section class="sec-h"><h2>Booked rooms</h2><span class="note">' + upcoming.length + ' current and upcoming</span></section><section class="list">' + list + '</section>' +
     (blocksAhead.length ? '<section class="sec-h"><h2>Blocked rooms</h2></section><section class="list">' + blocksAhead.map(blockItem).join('') + '</section>' : '');
 }
@@ -719,7 +862,47 @@ function bookingItem(b) {
   return '<div class="card item click" data-act="booking" data-id="' + esc(b.id) + '" role="button" tabindex="0"><span class="rno">' + b.room + '</span>' +
     '<div><h3>' + esc(roomOf(b.room).name) + ' · ' + esc(b.guest) + '</h3><div class="meta">' + b.guests + (b.guests === 1 ? ' guest' : ' guests') + ' · booked by ' + esc(b.by) + (groupSize(b) > 1 ? ' · one of ' + groupSize(b) + ' rooms' : '') + '</div>' +
     '<div class="dates num"><span>' + esc(fmt(b.dateIn)) + ' ' + b.slotIn + '</span><span class="arr">→</span><span>' + esc(fmt(b.dateOut)) + ' ' + b.slotOut + '</span></div></div>' +
-    '<div class="side"><span class="tag t-' + esc(b.purpose) + '">' + esc(b.purpose) + '</span></div></div>';
+    '<div class="side"><span class="tag t-' + esc(b.purpose) + '">' + esc(b.purpose) + '</span>' + stayPill(b) + '</div></div>';
+}
+/* ── Guest arrived / departed (marked by the Mess Hav on the Board) ── */
+function stayPill(b) {
+  return (planChanged(b) && !b.departedOn ? '<span class="pill p-chg">Timings changed</span>' : '') + (b.departedOn ? '<span class="pill p-left">Departed</span>' : b.arrivedOn ? '<span class="pill p-occupied">In room</span>' : '');
+}
+function stampDay(s) { return s ? fmt(String(s).slice(0, 10), true) + ' · ' + String(s).slice(11, 16) : ''; }
+function slotLabel(i) { return fmt(addDays('1970-01-01', Math.floor(i / 2)), true) + ' · ' + (i % 2 ? 'AN' : 'FN'); }
+function bookedSlot(s) { var p = String(s || '').split(' '); return p.length === 2 ? fmt(p[0], true) + ' · ' + p[1] : ''; }
+function isHav() { return S.data.me.role === 'HAV'; }
+function canArrive(b) { return isHav() && !b.blocked && !b.arrivedOn && !b.departedOn && b.dateIn === S.data.today && nowIdx() <= bOut(b); }
+function canDepart(b) { var n = nowIdx(); return isHav() && !b.blocked && !b.departedOn && (b.arrivedOn || n >= bIn(b)) && n <= bOut(b) + 4; }
+function canUndoStay(b) { return isHav() && !b.blocked && !!(b.arrivedOn || b.departedOn); }
+function stayStatus(b) {
+  var n = nowIdx();
+  if (b.departedOn) return 'Departed · ' + stampDay(b.departedOn);
+  if (b.arrivedOn) return 'In room · arrived ' + stampDay(b.arrivedOn);
+  if (n > bOut(b)) return '';
+  return b.dateIn === S.data.today || b.dateIn === addDays(S.data.today, 1) ? 'Not arrived yet' : '';
+}
+function contactBox(msg) {
+  openModal({ title: 'Contact the PMC or Mess Secy',
+    body: '<div class="chgbox" style="margin:0"><b>Booking not changed as asked</b>' + esc(msg) + '</div>',
+    foot: '<button class="btn" data-act="close">OK</button>' });
+}
+function needsContact(e) { return /PMC or Mess Secy/i.test(String(e && e.message || e)); }
+function stayConfirm(b, act) {
+  var n = nowIdx(), room = '<b>' + esc(roomLabel(b.room)) + '</b>', g = '<b>' + esc(b.guest) + '</b>';
+  var told = 'The PMC, the Mess Secy and ' + esc(b.by) + ' will be notified in the app.';
+  if (act === 'arrived') {
+    if (n < bIn(b)) return ['Guests arrived early?', g + ' is booked from <b>' + esc(slotLabel(bIn(b))) + '</b>. Marking arrived now starts the booking from <b>' + esc(slotLabel(n)) + '</b>, if the room is free. ' + told, 'Guests arrived'];
+    if (n > bIn(b)) return ['Guests arrived late?', g + ' was booked from <b>' + esc(slotLabel(bIn(b))) + '</b>. Marking arrived now moves the start to <b>' + esc(slotLabel(n)) + '</b>. ' + room + ' will show as Occupied.', 'Guests arrived'];
+    return ['Guests arrived?', 'Mark ' + g + ' as arrived now? ' + room + ' will show as Occupied.', 'Guests arrived'];
+  }
+  if (act === 'departed') {
+    var end = Math.max(bIn(b), n - 1);
+    if (end < bOut(b)) return ['Guests departed early?', room + ' is booked till <b>' + esc(slotLabel(bOut(b))) + '</b>. Marking ' + g + ' as departed now frees the room from now, so it can be booked again.', 'Guests departed'];
+    if (end > bOut(b)) return ['Guests stayed on?', 'This booking ended <b>' + esc(slotLabel(bOut(b))) + '</b>. Marking ' + g + ' as departed now extends it to <b>' + esc(slotLabel(end)) + '</b>, if the room is free. ' + told + ' If the room was booked for someone else, you will be asked to contact the PMC or Mess Secy.', 'Guests departed'];
+    return ['Guests departed?', 'Mark ' + g + ' as departed now? ' + room + ' will show as Vacant.', 'Guests departed'];
+  }
+  return ['Undo?', 'Undo the ' + (b.departedOn ? 'departure' : 'arrival') + ' marked for ' + g + '? The booked dates are put back.', 'Undo'];
 }
 function viewChart() {
   var d = S.data, start = S.winStart, base = dayNum(start) * 2, days = 14, cols = days * 2, cur = nowIdx();
@@ -740,7 +923,7 @@ function viewChart() {
       var s = bIn(b) - base, e = bOut(b) - base;
       if (e < 0 || s > cols - 1) return;
       var cs = Math.max(0, s), ce = Math.min(cols - 1, e);
-      var cls = 'blk ' + esc(b.purpose) + (b.byId === d.me.id && !b.blocked ? ' mine' : '') + (s < 0 ? ' cl' : '') + (e > cols - 1 ? ' cr' : '');
+      var cls = 'blk ' + esc(b.purpose) + (b.byId === d.me.id && !b.blocked ? ' mine' : '') + (b.departedOn ? ' gone' : '') + (s < 0 ? ' cl' : '') + (e > cols - 1 ? ' cr' : '');
       var label = b.blocked ? 'Blocked' + (b.reason ? ' · ' + b.reason : '') : b.guest;
       cells += '<button class="' + cls + '" style="grid-column:' + (cs + 1) + ' / span ' + (ce - cs + 1) + '" data-act="booking" data-id="' + esc(b.id) + '" title="' + esc(b.blocked ? label : b.guest + ' · ' + b.by) + '"><span>' + esc(label) + '</span></button>';
     });
@@ -814,9 +997,78 @@ function groupList(list, key) {
   return out;
 }
 function arrivalGroups() {
-  var t = S.data.today, end = addDays(t, 2);
-  return groupList(realBookings().filter(function (b) { return b.dateIn >= t && b.dateIn <= end; })
-    .sort(function (a, b) { return bIn(a) - bIn(b) || a.room - b.room; }));
+  var t = S.data.today, end = addDays(t, 1), since = addDays(t, -1);
+  return groupList(realBookings().filter(function (b) {
+    return (b.dateIn >= t && b.dateIn <= end) || (planChanged(b) && b.planOn.slice(0, 10) >= since && b.dateOut >= t);
+  }).sort(function (a, b) { return bIn(a) - bIn(b) || a.room - b.room; }));
+}
+/* ── Arrival and departure timings, entered by the Mess Hav after speaking to the guest ── */
+function planChanged(b) { return !!(b.planFrom && b.planTo && b.planFrom !== b.planTo); }
+function planSpan(s) {
+  var p = String(s || '').split('|'), a = (p[0] || '').split(' '), z = (p[1] || '').split(' ');
+  return esc(fmt(a[0])) + ' ' + a[1] + ' → ' + esc(fmt(z[0])) + ' ' + z[1];
+}
+function planSeenKey() { return 'pm_plan_' + S.data.me.id; }
+function planSeen() { try { return JSON.parse(store(planSeenKey()) || '{}'); } catch (e) { return {}; } }
+function unseenPlans() {
+  var r = S.data.me.role;
+  if (r !== 'PMC' && r !== 'SECY') return [];
+  var seen = planSeen();
+  return arrivalGroups().filter(function (g) { return planChanged(g.b) && seen[g.b.id] !== g.b.planOn; });
+}
+function markPlansSeen() {
+  var seen = planSeen(), list = unseenPlans();
+  if (!list.length) return;
+  list.forEach(function (g) { seen[g.b.id] = g.b.planOn; S.planNew[g.b.id] = 1; });
+  store(planSeenKey(), JSON.stringify(seen));
+  setTimeout(renderBadges, 0);
+}
+function hmSlot(t) { return Number(String(t).slice(0, 2)) < 12 ? 'FN' : 'AN'; }
+function planDraft(b) {
+  var e = S.plans[b.id];
+  if (e) return e;
+  return { ad: b.expArrival ? b.expArrival.slice(0, 10) : b.dateIn, at: b.expArrival ? b.expArrival.slice(11, 16) : '',
+    dd: b.expDeparture ? b.expDeparture.slice(0, 10) : b.dateOut, dt: b.expDeparture ? b.expDeparture.slice(11, 16) : '' };
+}
+/** What saving these timings will do to the booking, in words. */
+function planHint(b, p) {
+  if (!p.ad || !p.at || !p.dd || !p.dt) return { cls: '', html: 'Pick the date and time the guest will arrive and leave, then save.' };
+  if (p.dd + ' ' + p.dt <= p.ad + ' ' + p.at) return { cls: 'chg', html: 'Departure must be after arrival.' };
+  var si = hmSlot(p.at), so = hmSlot(p.dt), ch = [];
+  if (p.ad !== b.dateIn || si !== b.slotIn) ch.push('Arrival <b>' + esc(fmt(b.dateIn)) + ' ' + b.slotIn + '</b> → <b>' + esc(fmt(p.ad)) + ' ' + si + '</b>');
+  if (p.dd !== b.dateOut || so !== b.slotOut) ch.push('Departure <b>' + esc(fmt(b.dateOut)) + ' ' + b.slotOut + '</b> → <b>' + esc(fmt(p.dd)) + ' ' + so + '</b>');
+  if (!ch.length) return { cls: '', html: 'Same as the booking (' + esc(fmt(b.dateIn)) + ' ' + b.slotIn + ' → ' + esc(fmt(b.dateOut)) + ' ' + b.slotOut + '). Saving changes nothing on the Board.' };
+  return { cls: 'chg', html: 'Saving will change the booking on the Board:<br>' + ch.join('<br>') };
+}
+/** Times in half-hour steps, for the guest's arrival and departure. */
+function timeOpts(v) {
+  var o = '<option value=""' + (v ? '' : ' selected') + '>Time</option>';
+  for (var i = 0; i < 48; i++) {
+    var t = ('0' + Math.floor(i / 2)).slice(-2) + ':' + (i % 2 ? '30' : '00');
+    o += '<option value="' + t + '"' + (t === v ? ' selected' : '') + '>' + t + (i === 24 ? ' (noon)' : '') + '</option>';
+  }
+  return o;
+}
+function planBlock(b) {
+  var p = planDraft(b), h = planHint(b, p), id = esc(b.id), t = S.data.today;
+  function row(lbl, kd, kt, aria) {
+    return '<div class="plan-row"><label for="pl-' + kd + '-' + id + '">' + lbl + '</label>' +
+      '<input class="inp num" type="date" id="pl-' + kd + '-' + id + '" data-plan="' + id + '" data-k="' + kd + '" min="' + t + '" value="' + esc(p[kd]) + '" aria-label="' + aria + ' date">' +
+      '<select class="inp num" data-plan="' + id + '" data-k="' + kt + '" aria-label="' + aria + ' time">' + timeOpts(p[kt]) + '</select></div>';
+  }
+  return '<div class="plan"><div class="plan-h">Guest\'s timings <span class="note" style="letter-spacing:0;text-transform:none;font-family:var(--f-ui)">· before 12:00 is FN</span></div>' + row('Arrival', 'ad', 'at', 'Arrival') + row('Departure', 'dd', 'dt', 'Departure') +
+    '<div class="plan-hint ' + h.cls + '" id="ph-' + id + '">' + h.html + '</div>' +
+    '<button class="btn sm" data-act="savePlan" data-id="' + id + '">' + icon('check') + 'Save timings</button></div>';
+}
+function expLines(b) {
+  if (!b.expArrival && !b.expDeparture) return '';
+  return '<div class="exp num">' + (b.expArrival ? '<div><span>Arrives</span> ' + esc(stampDay(b.expArrival)) + '</div>' : '') +
+    (b.expDeparture ? '<div><span>Leaves</span> ' + esc(stampDay(b.expDeparture)) + '</div>' : '') + '</div>';
+}
+function chgBox(b, isNew) {
+  if (!planChanged(b)) return '';
+  return '<div class="chgbox"><b>Timings changed by the Mess Hav' + (isNew ? '<span class="new">NEW</span>' : '') + '</b>' +
+    'Booked: ' + planSpan(b.planFrom) + '<br>Now: ' + planSpan(b.planTo) + (b.planOn ? '<br><span class="note">' + esc(stampText(b.planOn)) + (b.planBy ? ' · ' + esc(b.planBy) : '') + '</span>' : '') + '</div>';
 }
 
 /* WhatsApp confirmation to the guest, from the requesting officer's or the Mess Hav's own WhatsApp */
@@ -839,7 +1091,15 @@ function waCaption(b) {
 function waChatLink(b) { return 'https://wa.me/' + waNumber(b.mobile) + '?text=' + encodeURIComponent(waCaption(b)); }
 function waButton(b, small, arr) {
   if (!canWhatsApp(b, arr)) return '';
+  if (b.waSentOn) return '<div class="wa-box"><div class="wa-sent">✓ Confirmation already sent on WhatsApp<small> · ' + esc(stampText(b.waSentOn)) + '</small></div>' +
+    '<button class="btn ghost sm wa-again" data-act="waCard" data-id="' + esc(b.id) + '">' + icon('chat') + 'Send confirmation again on WhatsApp</button></div>';
   return '<button class="btn wa' + (small ? ' sm' : '') + '" data-act="waCard" data-id="' + esc(b.id) + '">' + icon('chat') + 'Send confirmation on WhatsApp</button>';
+}
+/** Records that this officer sent the confirmation; only he is shown it as already sent. */
+function waSent(id, close, quiet) {
+  if (!id) return;
+  call('apiMarkWaSent', S.token, id).then(function (st) { gotState(st); if (close) closeModal(); render(); if (!quiet) toast('Confirmation marked as sent on WhatsApp'); })
+    .catch(function (e) { handleErr(e); });
 }
 function loadImg(src) { return new Promise(function (res, rej) { var i = new Image(); i.onload = function () { res(i); }; i.onerror = rej; i.src = src; }); }
 function cardRR(g, x, y, w, h, r) { g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); }
@@ -1019,7 +1279,7 @@ function shareImageModal(o) {
       var file = null, canShare = false, ios = isIOS();
       try { file = new File([blob], name, { type: 'image/png' }); canShare = !!(navigator.share && navigator.canShare && navigator.canShare({ files: [file] })); } catch (e) { canShare = false; }
       var num = waNumber(o.mobile);
-      S.wa = { file: file, text: o.text, ios: ios, chat: num ? 'https://wa.me/' + num : '' };
+      S.wa = { id: o.id, file: file, text: o.text, ios: ios, chat: num ? 'https://wa.me/' + num : '' };
       var who = 'the guest\'s chat' + (o.mobile ? ' (<span class="num">' + esc(o.mobile) + '</span>)' : '');
       var steps = canShare ?
         '<ol class="steps-l"><li>Tap <b>Share picture on WhatsApp</b>, pick <b>WhatsApp</b>, then ' + who + '.</li>' +
@@ -1040,7 +1300,7 @@ function shareImageModal(o) {
   }).catch(function () { toast('Could not make the picture. Try again.', true); });
 }
 function waCardModal(b) {
-  shareImageModal({ title: 'Confirmation for ' + b.guest, draw: drawCard(b), name: 'PIFFER-Mess-booking-' + b.guest, text: waCaption(b), mobile: b.mobile,
+  shareImageModal({ id: b.id, title: 'Confirmation for ' + b.guest, draw: drawCard(b), name: 'PIFFER-Mess-booking-' + b.guest, text: waCaption(b), mobile: b.mobile,
     captionNote: 'The location link goes as the caption.' });
 }
 
@@ -1051,7 +1311,7 @@ function toldText(ownerId, ownerName) {
   var r = S.data.me.role, other = ownerId && ownerId !== S.data.me.id;
   if (r === 'CO') return 'The PMC and the Mess Secy have been informed.';
   if (r === 'PMC') return (other ? ownerName + ' and the Mess Secy have' : 'The Mess Secy has') + ' been informed.';
-  return (other ? ownerName + ', the PMC and the CO have' : 'The PMC and the CO have') + ' been informed.';
+  return (other ? ownerName + ' and the PMC have' : 'The PMC has') + ' been informed.';
 }
 function formSpan(f) {
   if (!f.dateIn || !f.dateOut) return null;
@@ -1242,25 +1502,26 @@ function viewArrivals() {
     var rel = dd.date === d.today ? 'Today · ' : dd.date === addDays(d.today, 1) ? 'Tomorrow · ' : '';
     return '<div class="arr-h">' + rel + esc(fmt(dd.date)) + '</div><section class="list">' + dd.items.join('') + '</section>';
   }).join('') : '<div class="card empty"><b>' + (gs.length ? 'Nothing here' : 'No arrivals') + '</b>' +
-    (gs.length ? (f === 'done' ? 'No guest has been marked as spoken to yet.' : 'All guests have been spoken to.') : 'No guests arrive between today and ' + esc(fmt(addDays(d.today, 2))) + '.') + '</div>';
-  return '<section class="sec-h"><div><div class="kicker">Today to ' + esc(fmt(addDays(d.today, 2))) + '</div><h2>Arrivals</h2></div>' + seg + '</section>' + body;
+    (gs.length ? (f === 'done' ? 'No guest has been marked as spoken to yet.' : 'All guests have been spoken to.') : 'No guests arrive today or tomorrow.') + '</div>';
+  if (!hav) markPlansSeen();
+  return '<section class="sec-h"><div><div class="kicker">Today and tomorrow</div><h2>Arrivals</h2></div>' + seg + '</section>' + body;
 }
 function arrivalCard(g, hav) {
   var b = g.b, rooms = g.rooms.map(function (n) { return esc(roomOf(n).name) + ' (No ' + n + ')'; }).join(', ');
-  var note = S.arrNotes[b.id] != null ? S.arrNotes[b.id] : (b.arrivalNote || '');
-  var status = b.spoken ? '<div class="okline">✓ Spoken to guest' + (b.spokenBy ? ' · ' + esc(b.spokenBy) : '') + (b.spokenOn ? ' · ' + esc(stampText(b.spokenOn)) : '') + '</div>' :
+  var here = b.arrivedOn || b.departedOn;
+  var status = b.departedOn ? '<div class="okline">Departed · ' + esc(stampDay(b.departedOn)) + '</div>' : b.arrivedOn ? '<div class="okline">✓ Arrived · ' + esc(stampDay(b.arrivedOn)) + '</div>' : b.spoken ? '<div class="okline">✓ Spoken to guest' + (b.spokenBy ? ' · ' + esc(b.spokenBy) : '') + (b.spokenOn ? ' · ' + esc(stampText(b.spokenOn)) : '') + '</div>' :
     '<div class="warnline">Not spoken to yet</div>';
   var phone = b.mobile ? '<a class="tel num" href="tel:' + esc(b.mobile) + '">' + icon('phone') + esc(b.mobile) + '</a>' : '<span class="note">No mobile number given</span>';
-  var ctl = hav ? '<div class="spoke"><label class="tick' + (b.spoken ? ' on' : '') + '"><input type="checkbox" data-spoken="' + esc(b.id) + '"' + (b.spoken ? ' checked' : '') + '>' +
-      '<span class="box">' + icon('tick', '0 0 16 16') + '</span><span><b>Spoken to guest</b></span></label>' +
-      '<input class="inp" data-arr="' + esc(b.id) + '" maxlength="200" placeholder="Arrival details, e.g. 1400h by train" value="' + esc(note) + '" aria-label="Arrival details">' +
-      '<button class="btn ghost sm" data-act="saveArrNote" data-id="' + esc(b.id) + '">Save</button></div>' :
-    (b.arrivalNote ? '<div class="rmk"><b>Arrival:</b> ' + esc(b.arrivalNote) + '</div>' : '');
+  var old = b.arrivalNote ? '<div class="rmk"><b>Arrival:</b> ' + esc(b.arrivalNote) + '</div>' : '';
+  var full = hav && !here ? '<div class="arr-full"><div class="spoke only"><label class="tick' + (b.spoken ? ' on' : '') + '"><input type="checkbox" data-spoken="' + esc(b.id) + '"' + (b.spoken ? ' checked' : '') + '>' +
+      '<span class="box">' + icon('tick', '0 0 16 16') + '</span><span><b>Spoken to guest</b></span></label></div>' +
+      (b.spoken ? planBlock(b) : '<p class="note" style="margin:8px 2px 0">Tick after speaking to the guest, then enter the arrival and departure timings.</p>') + chgBox(b) + '</div>' : '';
+  var ctl = full ? '' : expLines(b) + chgBox(b, !hav && S.planNew[b.id]) + old;
   return '<div class="card item"><span class="rno">' + g.rooms[0] + '</span><div><h3>' + esc(b.guest) + ' <span class="note">· ' + b.guests + (b.guests === 1 ? ' guest' : ' guests') + '</span></h3>' +
     '<div class="meta">' + rooms + ' · booked by ' + esc(b.by) + '</div>' +
     '<div class="dates num"><span>' + esc(fmt(b.dateIn)) + ' ' + b.slotIn + '</span><span class="arr">→</span><span>' + esc(fmt(b.dateOut)) + ' ' + b.slotOut + '</span></div>' +
     '<div style="margin-top:8px">' + phone + '</div>' + (hav ? '<div class="arr-wa">' + waButton(b, true, true) + '</div>' : '') + status + ctl + '</div>' +
-    '<div class="side"><span class="tag t-' + esc(b.purpose) + '">' + esc(b.purpose) + '</span></div></div>';
+    '<div class="side"><span class="tag t-' + esc(b.purpose) + '">' + esc(b.purpose) + '</span></div>' + full + '</div>';
 }
 
 
@@ -1429,13 +1690,24 @@ function bookingModal(id) {
   openModal({ title: roomLabel(b.room),
     body: '<div class="kv num"><div><span>Guest</span><b>' + esc(b.guest) + '</b></div><div><span>No of guests</span><b>' + b.guests + '</b></div>' +
       '<div><span>Booked by</span><b>' + esc(b.by) + '</b></div><div><span>Purpose</span><b><span class="tag t-' + esc(b.purpose) + '">' + esc(b.purpose) + '</span></b></div>' +
-      '<div><span>Date in</span><b>' + esc(fmt(b.dateIn, true)) + ' · ' + b.slotIn + '</b></div><div><span>Date out</span><b>' + esc(fmt(b.dateOut, true)) + ' · ' + b.slotOut + '</b></div>' +
+      (b.arrivedOn ? '<div><span>Arrived</span><b>' + esc(stampDay(b.arrivedOn)) + '</b></div>' : '<div><span>Date in</span><b>' + esc(fmt(b.dateIn, true)) + ' · ' + b.slotIn + '</b></div>') +
+      (b.departedOn ? '<div><span>Departed</span><b>' + esc(stampDay(b.departedOn)) + '</b></div>' : '<div><span>Date out</span><b>' + esc(fmt(b.dateOut, true)) + ' · ' + b.slotOut + '</b></div>') +
+      (b.arrivedOn && b.bookedIn && b.bookedIn !== b.dateIn + ' ' + b.slotIn && !(b.departedOn && b.bookedIn === b.dateIn + ' ' + b.slotIn) ? '<div><span>Booked from</span><b>' + esc(bookedSlot(b.bookedIn)) + '</b></div>' : '') +
+      (b.departedOn && b.bookedOut ? '<div><span>Booked till</span><b>' + esc(bookedSlot(b.bookedOut)) + '</b></div>' : '') +
+      (b.expArrival && !b.arrivedOn && !b.departedOn ? '<div><span>Expected arrival</span><b>' + esc(stampDay(b.expArrival)) + '</b></div>' : '') +
+      (b.expDeparture && !b.departedOn ? '<div><span>Expected departure</span><b>' + esc(stampDay(b.expDeparture)) + '</b></div>' : '') +
+      (planChanged(b) ? '<div style="grid-column:1/-1"><span>Timings changed by the Mess Hav</span><b>Booked ' + planSpan(b.planFrom) + '<br>Now ' + planSpan(b.planTo) + '</b></div>' : '') +
+      (stayStatus(b) ? '<div style="grid-column:1/-1"><span>Guest status</span><b class="stay-row">' + (b.departedOn ? '<span class="pill p-left">Departed</span>' : b.arrivedOn ? '<span class="pill p-occupied">In room</span>' : '<span class="pill p-arriving">Not arrived yet</span>') + '</b></div>' : '') +
       (b.mobile ? '<div><span>Guest mob no</span><b><a href="tel:' + esc(b.mobile) + '">' + esc(b.mobile) + '</a></b></div>' : '') +
       (b.decidedBy ? '<div><span>Approved by</span><b>' + esc(b.decidedBy) + '</b></div>' : '') +
       (b.spoken !== undefined ? '<div><span>Guest contacted</span><b>' + (b.spoken ? 'Yes' + (b.spokenBy ? ' · ' + esc(b.spokenBy) : '') : 'Not yet') + '</b></div>' : '') +
       (b.arrivalNote && b.spoken !== undefined ? '<div style="grid-column:1/-1"><span>Arrival details</span><b>' + esc(b.arrivalNote) + '</b></div>' : '') +
       (isSecy && b.remarks ? '<div style="grid-column:1/-1"><span>Remarks</span><b>' + esc(b.remarks) + '</b></div>' : '') + '</div>',
-    foot: waButton(b) +
+    foot: (canArrive(b) || canDepart(b) || canUndoStay(b) ? '<div class="stay-acts">' +
+        (canArrive(b) ? '<button class="btn" data-act="stay" data-v="arrived" data-id="' + esc(b.id) + '">' + icon('check') + 'Guests arrived</button>' : '') +
+        (canDepart(b) ? '<button class="btn' + (canArrive(b) ? ' ghost' : '') + '" data-act="stay" data-v="departed" data-id="' + esc(b.id) + '">Guests departed</button>' : '') +
+        (canUndoStay(b) ? '<button class="btn ghost sm" data-act="stay" data-v="undo" data-id="' + esc(b.id) + '">Undo ' + (b.departedOn ? 'departure' : 'arrival') + '</button>' : '') + '</div>' : '') +
+      waButton(b) +
       (isSecy && live ? '<button class="btn danger ghost" data-act="cancelBooking" data-id="' + esc(b.id) + '">Cancel booking</button><button class="btn" data-act="openBk" data-id="' + esc(b.id) + '">Edit booking</button>' : '') });
 }
 function coConfirmModal(jb) {
@@ -1448,7 +1720,7 @@ function coConfirmModal(jb) {
     body: '<div style="display:grid;justify-items:center;gap:10px;text-align:center">' + tick + '<p style="margin:0;font-size:17px">' + (co ? 'Sir, your booking is confirmed.' : 'Your booking is confirmed.') + '</p></div>' +
       '<div class="kv num"><div><span>' + (n > 1 ? 'Guest rooms' : 'Guest room') + '</span><b>' + esc(roomsTxt) + '</b></div><div><span>Guest</span><b>' + esc(b.guest) + '</b></div><div><span>No of guests</span><b>' + b.guests + '</b></div>' +
       '<div><span>Date in</span><b>' + esc(fmt(b.dateIn, true)) + ' · ' + b.slotIn + '</b></div><div><span>Date out</span><b>' + esc(fmt(b.dateOut, true)) + ' · ' + b.slotOut + '</b></div></div>' +
-      '<p class="note" style="margin:0">' + (co ? 'The PMC and the Mess Secy have' : 'The Mess Secy has') + ' been informed. A confirmation has also been sent to your email.</p>',
+      '<p class="note" style="margin:0">' + (co ? 'The PMC and the Mess Secy have' : 'The Mess Secy has') + ' been notified.</p>',
     foot: waButton(b) + '<button class="btn' + (canWhatsApp(b) ? ' ghost' : '') + '" data-act="close">' + (co ? 'Thank you' : 'Done') + '</button>' });
 }
 function noRoomModal() {
@@ -1477,7 +1749,7 @@ function menuModal() {
     body: '<div class="kv">' + (me.roleLabel ? '<div><span>Appointment</span><b>' + esc(me.roleLabel) + '</b></div>' : '') + '<div><span>Mobile</span><b class="num">' + esc(me.mobile) + '</b></div>' +
       '<div style="grid-column:1/-1"><span>Email</span><b>' + esc(me.email || '—') + '</b></div></div>' +
       '<div class="row"><button class="btn ghost sm" data-act="profEmail">Change email</button><button class="btn ghost sm" data-act="profMobile">Change mobile number</button></div>' +
-      '<p class="note" style="margin:0">Updated ' + esc(S.data.serverTime.slice(11)) + '. The board refreshes itself every minute.</p>',
+      pushRow() + '<p class="note" style="margin:0">Updated ' + esc(S.data.serverTime.slice(11)) + '. The board refreshes itself every minute.</p>',
     foot: '<button class="btn ghost" data-act="refreshNow">Refresh now</button><button class="btn danger" data-act="signout">Sign out</button>' });
 }
 function emailModal() {
@@ -1515,7 +1787,7 @@ function val(id) { var el = document.getElementById(id); return el ? el.value.tr
 function authErr(msg) { S.auth.error = msg; S.auth.info = ''; render(); }
 function afterLogin(r) {
   S.token = r.token; store('pm_token', r.token);
-  S.view = 'board'; S.winStart = null; gotState(r.state, true); render();
+  S.view = 'board'; S.winStart = null; gotState(r.state, true); afterSignIn(); render();
   toast('Welcome, ' + r.state.me.name);
 }
 var A = {
@@ -1580,7 +1852,27 @@ var A = {
   ovClose: function (el, ev) { if (ev.target === el) A.close(); },
   modalOk: function () { var m = S.modal, r = document.getElementById('m-rmk'); var v = r ? r.value.trim() : ''; closeModal(); if (m && m.resolve) m.resolve({ remarks: v }); },
   refreshNow: function () { closeModal(); refresh(false).then(function () { toast('Up to date'); }); },
-  signout: function () { var t = S.token; closeModal(); signOutLocal('You have signed out.'); call('apiLogout', t).catch(function () {}); },
+  signout: function () {
+    var t = S.token; closeModal(); swToken(null);
+    try { if (navigator.clearAppBadge) navigator.clearAppBadge().catch(function () {}); } catch (e) {}
+    var stop = pushState() === 'granted' && navigator.serviceWorker ? navigator.serviceWorker.ready.then(function (reg) { return reg.pushManager.getSubscription(); })
+      .then(function (sub) { if (sub) return call('apiPushUnsubscribe', t, sub.endpoint); }).catch(function () {}) : Promise.resolve();
+    signOutLocal('You have signed out.');
+    stop.then(function () { return call('apiLogout', t); }).catch(function () {});
+  },
+  notes: function () { notesModal(); },
+  noteGo: function (el) { closeModal(); var v = el.dataset.v; if (canSee(v)) { S.view = v; render(); window.scrollTo(0, 0); } },
+  pushOn: function (el) {
+    if (pushState() === 'ios-home') return toast('On iPhone, add the app to your Home Screen first, then open it from there.', true);
+    el.disabled = true;
+    Promise.resolve(Notification.requestPermission()).then(function (p) {
+      if (p !== 'granted') { el.disabled = false; render(); return toast(p === 'denied' ? 'Notifications are blocked. Allow them for PIFFER Mess in the phone\'s settings.' : 'Notifications not turned on.', true); }
+      return pushSubscribe().then(function () { render(); toast('Notifications are on for this phone.'); });
+    }).catch(function (e) { el.disabled = false; toast(e && e.message ? e.message : 'Could not turn on notifications.', true); });
+  },
+  pushOff: function () { store('pm_push_off', '1'); pushOff().then(function () { render(); toast('Notifications are off for this phone.'); }).catch(function () { render(); }); },
+  pushLater: function () { store('pm_push_later', '1'); render(); },
+
   slot: function (el) { S.form[el.dataset.k] = el.dataset.v; el.parentNode.querySelectorAll('button').forEach(function (b) { b.classList.toggle('on', b === el); }); updateFormBits(); },
   roomsN: function (el) {
     var max = S.data.rooms.length;
@@ -1611,7 +1903,7 @@ var A = {
   cancelReq: function (el) {
     var id = el.dataset.id, m = S.data.mine.filter(function (x) { return x.id === id; })[0];
     var approved = m && m.status === 'APPROVED';
-    confirmBox(approved ? 'Cancel booking?' : 'Withdraw request?', (approved ? 'The room will be free for others. The PMC will be told by email.' : 'The PMC will no longer see this request.') + ' Guest: <b>' + esc(m ? m.guest : '') + '</b>.', approved ? 'Cancel booking' : 'Withdraw', true)
+    confirmBox(approved ? 'Cancel booking?' : 'Withdraw request?', (approved ? 'The room will be free for others. The PMC will be notified.' : 'The PMC will no longer see this request.') + ' Guest: <b>' + esc(m ? m.guest : '') + '</b>.', approved ? 'Cancel booking' : 'Withdraw', true)
       .then(function (ok) { if (!ok) return; call('apiCancel', S.token, id, '').then(function (st) { gotState(st); markSeen(); render(); toast(approved ? 'Booking cancelled' : 'Request withdrawn'); }).catch(handleErr); });
   },
   cancelBooking: function (el) {
@@ -1624,8 +1916,41 @@ var A = {
     var id = el.dataset.id, rooms = (S.allot[id] || []).slice();
     if (!rooms.length) return;
     el.disabled = true;
-    call('apiDecide', S.token, id, 'APPROVE', rooms, '').then(function (st) { gotState(st); delete S.allot[id]; render(); toast('Approved · ' + rooms.map(roomLabel).join(', ') + '. The officer and the Mess Secy have been emailed.'); })
+    call('apiDecide', S.token, id, 'APPROVE', rooms, '').then(function (st) { gotState(st); delete S.allot[id]; render(); toast('Approved · ' + rooms.map(roomLabel).join(', ') + '. The officer and the Mess Secy have been notified.'); })
       .catch(function (e) { el.disabled = false; handleErr(e); refresh(true); });
+  },
+
+  savePlan: function (el) {
+    var id = el.dataset.id, b = S.data.bookings.filter(function (x) { return x.id === id; })[0];
+    if (!b) return;
+    var p = planDraft(b);
+    if (!p.ad || !p.at) return toast('Pick the date and time the guest will arrive.', true);
+    if (!p.dd || !p.dt) return toast('Pick the date and time the guest will leave.', true);
+    el.disabled = true;
+    call('apiArrivalPlan', S.token, id, { arrDate: p.ad, arrTime: p.at, depDate: p.dd, depTime: p.dt }).then(function (st) {
+      var was = b.dateIn + ' ' + b.slotIn + '|' + b.dateOut + ' ' + b.slotOut;
+      delete S.plans[id]; gotState(st); render();
+      var nb = S.data.bookings.filter(function (x) { return x.id === id; })[0] || b;
+      var now = nb.dateIn + ' ' + nb.slotIn + '|' + nb.dateOut + ' ' + nb.slotOut;
+      toast(now !== was ? 'Saved. Booking changed to ' + fmt(nb.dateIn) + ' ' + nb.slotIn + ' → ' + fmt(nb.dateOut) + ' ' + nb.slotOut + '. The Board is updated and the PMC and Mess Secy can see it.' :
+        'Saved. Timings match the booking, nothing changed on the Board.');
+    }).catch(function (e) { el.disabled = false; if (needsContact(e)) contactBox(String(e.message || e)); else handleErr(e); });
+  },
+
+  stay: function (el) {
+    var id = el.dataset.id, act = el.dataset.v, b = S.data.bookings.filter(function (x) { return x.id === id; })[0];
+    if (!b) return;
+    var c = stayConfirm(b, act);
+    confirmBox(c[0], c[1], c[2], act === 'undo').then(function (ok) {
+      if (!ok) return;
+      call('apiStay', S.token, id, act).then(function (st) {
+        gotState(st); render();
+        if (st.notice) return contactBox(st.notice);
+        var nb = S.data.bookings.filter(function (x) { return x.id === id; })[0] || b;
+        toast(act === 'arrived' ? 'Guests arrived: ' + nb.guest + '. ' + roomLabel(nb.room) + ' shows Occupied.' :
+          act === 'departed' ? 'Guests departed: ' + nb.guest + '. ' + roomLabel(nb.room) + ' is free.' : 'Undone. The booked dates are back.');
+      }).catch(function (e) { if (needsContact(e)) { contactBox(String(e.message || e)); refresh(true); } else { handleErr(e); refresh(true); } });
+    });
   },
 
   waCard: function (el) {
@@ -1637,7 +1962,9 @@ var A = {
   waShare: function () {
     if (!S.wa || !S.wa.file) return;
     copyText(S.wa.text);
+    var wid = S.wa.id;
     navigator.share(S.wa.ios ? { files: [S.wa.file] } : { files: [S.wa.file], text: S.wa.text })
+      .then(function () { waSent(wid, true); })
       .catch(function (e) { if (!e || e.name !== 'AbortError') toast('Could not open sharing. Use Save picture, then Open guest\'s chat.', true); });
   },
   waCopy: function () { if (S.wa) toast(copyText(S.wa.text) ? 'Caption copied' : 'Could not copy. Press and hold the caption to copy it.', !S.wa); },
@@ -1646,6 +1973,7 @@ var A = {
     copyText(S.wa.text);
     window.open(S.wa.chat, '_blank');
     toast('Caption copied. In the chat, attach the picture and paste the caption.');
+    waSent(S.wa.id, false, true);
   },
 
 
@@ -1665,7 +1993,7 @@ var A = {
   reject: function (el) {
     var id = el.dataset.id;
     el.disabled = true;
-    call('apiDecide', S.token, id, 'REJECT', null, S.rejectRemarks[id] || '').then(function (st) { gotState(st); S.rejecting = null; delete S.rejectRemarks[id]; render(); toast('Marked not approved. The officer and the Mess Secy have been emailed.'); })
+    call('apiDecide', S.token, id, 'REJECT', null, S.rejectRemarks[id] || '').then(function (st) { gotState(st); S.rejecting = null; delete S.rejectRemarks[id]; render(); toast('Marked not approved. The officer and the Mess Secy have been notified.'); })
       .catch(function (e) { el.disabled = false; handleErr(e); });
   },
   addOff: function (el) {
@@ -1805,6 +2133,16 @@ document.addEventListener('keydown', function (ev) {
 });
 document.addEventListener('input', function (ev) {
   var t = ev.target;
+  if (t.dataset.plan) {
+    var pid = t.dataset.plan, pb = S.data.bookings.filter(function (x) { return x.id === pid; })[0];
+    if (!pb) return;
+    var pd = S.plans[pid] = S.plans[pid] || Object.assign({}, planDraft(pb));
+    pd[t.dataset.k] = t.value;
+    if (t.dataset.k === 'ad' && pd.dd && pd.dd < pd.ad) { pd.dd = pd.ad; var od = document.querySelector('[data-plan="' + pid + '"][data-k="dd"]'); if (od) od.value = pd.dd; }
+    var ph = document.getElementById('ph-' + pid), h = planHint(pb, pd);
+    if (ph) { ph.className = 'plan-hint ' + h.cls; ph.innerHTML = h.html; }
+    return;
+  }
   if (t.dataset.f) {
     var k = t.dataset.f;
     S.form[k] = k === 'guests' ? Math.min(20, Math.max(1, Number(t.value.replace(/\D/g, '')) || 1)) : k === 'rooms' ? Math.min(S.data.rooms.length, Math.max(1, Number(t.value.replace(/\D/g, '')) || 1)) : t.value;
@@ -1868,12 +2206,13 @@ function render() {
   root.innerHTML = S.data ? renderApp() : renderAuth();
   if (S.data) window.scrollTo(0, y);
   renderModal();
+  if (S.data) { setAppBadge(); readViewNotes(); }
 }
 
 /* ───────── boot ───────── */
 S.token = store('pm_token');
 if (S.token) {
-  call('apiState', S.token).then(function (st) { gotState(st, true); render(); })
+  call('apiState', S.token).then(function (st) { gotState(st, true); afterSignIn(); render(); })
     .catch(function (e) { var m = String(e.message); signOutLocal(m.indexOf('SESSION:') === 0 ? m.replace('SESSION:', '').trim() : ''); if (m.indexOf('SESSION:') !== 0) toast(m, true); });
 } else {
   render();
