@@ -1203,7 +1203,7 @@ function drawCard(b) {
     welcome.forEach(function (l, i) { g.fillText(l, L, y + 50 + i * 42); });
     g.fillStyle = '#e1e8df'; g.fillRect(L, divY, R - L, 2);
     // guest room(s)
-    var names = rows.map(function (x) { return roomOf(x.room).name + ' (No ' + x.room + ')'; }).join(', ');
+    var names = rows.map(function (x) { return roomOf(x.room).name; }).join(', ');   // room names only, no room numbers
     g.fillStyle = '#5b6a60'; g.font = '700 25px ' + COND; cardSpaced(g, rows.length > 1 ? 'GUEST ROOMS' : 'GUEST ROOM', L, divY + 48, 4);
     g.fillStyle = '#14532d'; var fs = cardFit(g, names, '700', SANS, 56, 32, R - L); g.fillText(names, L, divY + 48 + 12 + fs);
     // check-in and check-out
